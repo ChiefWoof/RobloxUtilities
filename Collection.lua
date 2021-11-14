@@ -19,7 +19,7 @@ end
 -- of equal to 1, returns the value at the index else returns a table of values.
 -- By default, the amount is 1
 -- @param {number} amount The amount of items to return
--- @returns {*[]?}
+-- @returns {*[]}
 
 function Collection:first(amount)
 	
@@ -40,7 +40,7 @@ end
 -- of equal to 1, returns the value at the index else returns a table of values.
 -- By default, the amount is 1
 -- @param {number} amount The amount of items to return
--- @returns {*[]?}
+-- @returns {*[]a}
 
 function Collection:last(amount)
 
