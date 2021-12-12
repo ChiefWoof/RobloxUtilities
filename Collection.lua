@@ -79,6 +79,15 @@ function Collection:clear()
 end
 
 ---
+-- @description Removes an item from the collection
+-- @returns {@self}
+
+function Collection:remove(index)
+	table.remove(self, index);
+	return self;
+end
+
+---
 -- @description Reverses the order of items
 -- @returns {@self}
 
@@ -167,12 +176,29 @@ function Collection:includes(...)
 end
 
 ---
--- @description Retrieves the index for specified item or returns -1
+-- @description Retrieves the index for specified item or returns 0
 -- @param {number} indexInitial The index to start at
+-- @param {*} value The value to look for
 -- @returns {number}
 
 function Collection:findIndex(indexInitial, value)
-	return table.find(self, value, indexInitial) or -1;
+	return table.find(self, value, indexInitial) or 0;
+end
+
+---
+-- @description Retrieves the indexes for the specified items or returns an empty Collection
+-- @param {number} indexInitial The index to start at
+-- @param {*...} The values to look for
+-- @returns {Collection}
+
+function Collection:findIndexMultiple(indexInitial, ...)
+	local indexes = Collection.new();
+	
+	for _, v in ipairs({...}) do
+		indexes:push(self:findIndex(indexInitial, v));
+	end
+	
+	return indexes;
 end
 
 
