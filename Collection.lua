@@ -22,17 +22,17 @@ end
 -- @returns {*[]}
 
 function Collection:first(amount)
-	
+
 	if (type(amount) ~= "number") then
 		amount = 1;
 	end
-	
+
 	if (amount < 0) then
 		return self:last(-amount);
 	else
 		return self:slice(1, amount);
 	end
-	
+
 end
 
 ---
@@ -40,7 +40,7 @@ end
 -- of equal to 1, returns the value at the index else returns a table of values.
 -- By default, the amount is 1
 -- @param {number} amount The amount of items to return
--- @returns {*[]a}
+-- @returns {*[]}
 
 function Collection:last(amount)
 
@@ -150,11 +150,11 @@ end
 
 
 function Collection:includes(...)
-	
+
 	if (table.getn({ ... }) == 0) then
 		return false;
 	end
-	
+
 	local bool = true;
 	for _, v in ipairs({ ... }) do
 		if (table.find(self, v) == nil) then
@@ -162,8 +162,17 @@ function Collection:includes(...)
 			break;
 		end
 	end
-	
+
 	return bool;
+end
+
+---
+-- @description Retrieves the index for specified item or returns -1
+-- @param {number} indexInitial The index to start at
+-- @returns {number}
+
+function Collection:findIndex(indexInitial, value)
+	return table.find(self, value, indexInitial) or -1;
 end
 
 
