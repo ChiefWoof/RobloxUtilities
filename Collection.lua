@@ -80,10 +80,17 @@ end
 
 ---
 -- @description Removes an item from the collection
+-- @param {...number} The indexes to remove
 -- @returns {@self}
 
-function Collection:remove(index)
-	table.remove(self, index);
+function Collection:remove(...)
+	local removed = 0;
+	for _, index in ipairs({...}) do
+		if (index > 0 and index <= #self) then
+			table.remove(self, index - removed);
+			removed += 1;
+		end
+	end
 	return self;
 end
 
